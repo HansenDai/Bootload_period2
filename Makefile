@@ -39,8 +39,7 @@ C_DIRS := app \
           platform/board \
           platform/comsis/device \
           platform/driver/src \
-          platform/driver/src/Legacy \
-          platform/syscall \
+          platform/syscall
 C_SOURCES := $(foreach dir,$(C_DIRS),$(wildcard $(dir)/*.c))
 
 
@@ -102,13 +101,12 @@ C_DEFS =  \
 AS_INCLUDES =
 
 # C includes
-C_INCLUDES = app \
+C_INCLUDES := app \
              platform/board \
              platform/comsis/device \
              platform/comsis/include \
              platform/driver/inc \
-             platform/driver/inc/Legacy \
-             platform/syscall \
+             platform/syscall
 C_INCLUDES := $(addprefix -I,$(C_INCLUDES))
 
 # compile gcc flags
@@ -185,3 +183,6 @@ clean:
 -include $(wildcard $(BUILD_DIR)/*.d)
 
 # *** EOF ***
+
+test:
+	@echo $(OBJECTS)

@@ -13,7 +13,7 @@
 ######################################
 # target
 ######################################
-TARGET := test
+TARGET := boot
 
 
 ######################################
@@ -36,6 +36,10 @@ BUILD_DIR:= build
 ######################################
 # C sources
 C_DIRS := app \
+		  components/crc \
+		  components/easylogger \
+		  components/ringbuffer \
+		  driver \
           platform/board \
           platform/comsis/device \
           platform/driver/src \
@@ -45,7 +49,8 @@ C_SOURCES := $(foreach dir,$(C_DIRS),$(wildcard $(dir)/*.c))
 
 # ASM sources
 ASM_SOURCES =  \
-platform/comsis/device/startup_stm32f407xx.s
+platform/comsis/device/startup_stm32f407xx.s \
+app/jumpapp.s
 
 # ASMM sources
 ASMM_SOURCES =
@@ -94,6 +99,7 @@ AS_DEFS =
 # C defines
 C_DEFS =  \
 -DUSE_HAL_DRIVER \
+-DUSE_FULL_LL_DRIVER \
 -DSTM32F407xx
 
 
@@ -102,6 +108,10 @@ AS_INCLUDES =
 
 # C includes
 C_INCLUDES := app \
+		  	 components/crc \
+		  	 components/easylogger \
+		  	 components/ringbuffer \
+			 driver \
              platform/board \
              platform/comsis/device \
              platform/comsis/include \
@@ -156,6 +166,9 @@ $(BUILD_DIR)/%.o: %.c Makefile | $(BUILD_DIR)
 $(BUILD_DIR)/%.o: %.s Makefile | $(BUILD_DIR)
 	$(AS) -c $(CFLAGS) $< -o $@
 $(BUILD_DIR)/%.o: %.S Makefile | $(BUILD_DIR)
+	$(AS) -c $(CFLAGS) $< -o $@
+
+$(BUILD_DIR)/jumpapp.o: app/jumpapp.s Makefile | $(BUILD_DIR)
 	$(AS) -c $(CFLAGS) $< -o $@
 
 $(BUILD_DIR)/$(TARGET).elf: $(OBJECTS) Makefile

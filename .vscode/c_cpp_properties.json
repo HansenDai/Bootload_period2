@@ -1,0 +1,33 @@
+{
+    "configurations": [
+        {
+            "name": "boot",
+            "includePath": [
+                "${workspaceFolder}/app",
+                "${workspaceFolder}/components/crc",
+                "${workspaceFolder}/components/easylogger",
+                "${workspaceFolder}/components/ringbuffer",
+                "${workspaceFolder}/driver",
+                "${workspaceFolder}/platform/board",
+                "${workspaceFolder}/platform/comsis/device",
+                "${workspaceFolder}/platform/comsis/include",
+                "${workspaceFolder}/platform/driver/inc",
+                "${workspaceFolder}/platform/syscall"
+            ],
+            "defines": [
+                "USE_HAL_DRIVER",
+                "USE_FULL_LL_DRIVER",
+                "STM32F407xx"
+            ],
+            "compilerPath": "${workspaceFolder}/tools/gcc-arm-none-eabi/10.3/bin/arm-none-eabi-gcc",
+            "intelliSenseMode": "linux-gcc-arm",
+            "cStandard": "c11",
+            "cppStandard": "gnu++11",
+            "mergeConfigurations": false,
+            "browse": {
+                "limitSymbolsToIncludedHeaders": true
+            }
+        }
+    ],
+    "version": 4
+}
